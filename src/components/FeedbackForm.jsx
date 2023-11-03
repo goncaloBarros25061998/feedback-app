@@ -1,14 +1,18 @@
-import React, { Component, useState } from 'react'
 import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
+import { useContext, useState } from 'react'
+import FeedbackContext from '../context/FeedbackContext'
 
-function FeedbackForm({handleAdd}) {
+function FeedbackForm() {
 
     const[text, setText] = useState('')
     const[rating, setRating] = useState('10')
     const[btnDisabled, setBtnDisabled] = useState(true)
     const[message, setMessage] = useState('')
+
+    const {addFeedback}= useContext(FeedbackContext)
+
     const handleTextChange = (e) => {
         //Statement to see if the text has >= 10 characets
         if(text === ''){
@@ -32,7 +36,7 @@ function FeedbackForm({handleAdd}) {
                 text: text,
                 rating
             }
-            handleAdd(newFeedback)
+            addFeedback(newFeedback)
 
             setText('')
         }
