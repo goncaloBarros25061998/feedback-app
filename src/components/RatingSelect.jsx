@@ -1,8 +1,19 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import FeedbackContext from '../context/FeedbackContext'
+
+
+
+
 function RatingSelect({select}) {
     //selection of the rating 
     const [selected, setSelected] = useState(10)
+    const { feedbackEdit  } = useContext(FeedbackContext)
+    // use effect bellow allows the user to see the rating while its changing the feedback
+    useEffect(() => {
+      setSelected(feedbackEdit.item.rating)
+
+    },[feedbackEdit])
     const handleChange = (e) => {
         setSelected(+e.currentTarget.value)
         select(+e.currentTarget.value)
